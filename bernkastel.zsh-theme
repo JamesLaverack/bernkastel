@@ -13,6 +13,20 @@ YS_VCS_PROMPT_SUFFIX="%{$reset_color%}"
 YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}x"
 YS_VCS_PROMPT_CLEAN=" %{$fg[green]%}o"
 
+# Editor info
+
+local editor_info='$(ys_editor_prompt_info)'
+ys_editor_prompt_info() {
+  echo "${YS_VCS_PROMPT_PREFIX1}editor${YS_VCS_PROMPT_PREFIX2}$EDITOR${YS_VCS_PROMPT_SUFFIX}"
+}
+
+# Kubectl context
+
+local kubectl_context='$(ys_kubectl_context_prompt_info)'
+ys_kubectl_context_prompt_info() {
+  echo "${YS_VCS_PROMPT_PREFIX1}kube${YS_VCS_PROMPT_PREFIX2}$(kubectl config current-context)${YS_VCS_PROMPT_SUFFIX}"
+}
+
 # Git info
 local git_info='$(ys_git_prompt_info)'
 ZSH_THEME_GIT_PROMPT_PREFIX="${YS_VCS_PROMPT_PREFIX1}git${YS_VCS_PROMPT_PREFIX2}"
@@ -66,6 +80,8 @@ PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
 %(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
 %{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
+${editor_info}\
+${kubectl_context}\
 ${hg_info}\
 ${git_info}\
  \
