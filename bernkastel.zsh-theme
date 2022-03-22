@@ -12,7 +12,7 @@ VCS_PROMPT_CLEAN=" %{$fg[green]%}o"
 # Kubectl context
 local kubectl_context='$(kubectl_context_prompt_info)'
 kubectl_context_prompt_info() {
-  echo "${VCS_PROMPT_PREFIX1}kube${VCS_PROMPT_PREFIX3}$(kubectl config current-context)${VCS_PROMPT_SUFFIX}"
+  echo "${VCS_PROMPT_PREFIX1}kube${VCS_PROMPT_PREFIX3}$(kubectl config current-context 2> /dev/null)${VCS_PROMPT_SUFFIX}"
 }
 
 # Git info
